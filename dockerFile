@@ -8,7 +8,7 @@ RUN yarn && yarn build
 
 FROM nginx:1.14-alpine
 
-COPY --from=0 /app/dist /var/www/react
+COPY --from=0 /app/build /var/www/react
 
 COPY nginx.conf /etc/nginx/
 
