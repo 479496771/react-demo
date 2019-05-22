@@ -8,11 +8,9 @@ const axiosConfig = {};
 axiosConfig.axios = axios.create({
     baseURL: 'http://192.168.35.246:9527',
     // baseURL: 'http://loaclhost:9527',
-    timeout: 1000,
+    timeout: 10000,
 });
 
-//用来处理刷新token后重新请求的自定义变量
-// axiosConfig.axios.defaults.isRetryRequest = false;
 
 //刷新token的请求方法
 if (localStorage.getItem('cooke_id')) {
@@ -26,14 +24,13 @@ axiosConfig.axios.interceptors.request.use(
         if (token) {
             config.headers['X-Access-Token'] = token;
         }
-        // console.log(config.headers['X-Access-Token'],'token')
-        // iView.LoadingBar.start();
-        console.log(config)
+        // if (config.method === 'post') {
+        //     config.data = JSON.stringify(config.data);
+        // }
+        console.log(config.data)
         return config;
     },
     err => {
-        // iView.LoadingBar.finish();
-        // iView.$Message.error('请求超时！');
         return Promise.reject(err);
     }
 );
@@ -43,10 +40,8 @@ axiosConfig.axios.interceptors.request.use(
 // http response 拦截器
 axiosConfig.axios.interceptors.response.use(
     response => {
-        // iView.LoadingBar.finish();
         return response
     }, error => { // 这里是返回状态码不为200时候的错误处理
-        // iView.LoadingBar.finish();
         // console.log(error.response.status, 5555555555555555)
         // if (error.response.data.code === 10103) {
         // localStorage.removeItem('cooke_id')

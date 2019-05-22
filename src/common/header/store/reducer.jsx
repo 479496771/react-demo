@@ -6,8 +6,9 @@ const stateDafault = fromJS({
     token: tokenInfo ? tokenInfo : "",
     login: tokenInfo ? true : false,
     addWindow: false,
-    loginWindow:true,
-    confirmLoading:false
+    loginWindow: true,
+    confirmLoading: false,
+    alertMessage: ''
 })
 
 export const reducer = (state = stateDafault, action) => {
@@ -16,7 +17,7 @@ export const reducer = (state = stateDafault, action) => {
             localStorage.setItem(actionType.TOKEN, action.value)
             //immutable对象的set方法，会结合之前immutable对象的值和设置的值，
             //返回一个全新的对象,set方法可以链式调用
-            return state.set('login', true).set('token', action.value).set('loginWindow',false).set('confirmLoading',false)
+            return state.set('login', true).set('token', action.value).set('loginWindow', false).set('confirmLoading', false)
 
         case actionType.GET_TOKEN:
             let tokenValue = localStorage.getItem(actionType.TOKEN)
