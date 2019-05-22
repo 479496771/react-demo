@@ -1,4 +1,8 @@
 version: "2"
 services:
   react_demo:
-    image:
+    image: daocloud.io/r520609/recact_web:master
+    ports: 
+    - 3566:80
+    volumes:
+    - /home/react/react_demo/log:/var/log/nginx/nginx
