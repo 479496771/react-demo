@@ -10,7 +10,7 @@ const AddPage = lazy(() => import('./component/addPage/index'))
 export default class IRoute extends React.Component {
     render() {
         return (
-            <BrowserRouter history={history} basename='/react/'>
+            <BrowserRouter history={history} basename='/react'>
                 <App>
                     <Suspense fallback={<div>Loading...</div>}>
                         <Switch>
