@@ -1,4 +1,4 @@
-import { Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from "history"
 import React, { Suspense, lazy } from 'react'
 import App from './App.jsx'
@@ -10,7 +10,7 @@ const AddPage = lazy(() => import('./component/addPage/index'))
 export default class IRoute extends React.Component {
     render() {
         return (
-            <Router history={history}>
+            <BrowserRouter history={history} basename='/react/'>
                 <App>
                     <Suspense fallback={<div>Loading...</div>}>
                         <Switch>
@@ -20,7 +20,7 @@ export default class IRoute extends React.Component {
                         </Switch>
                     </Suspense>
                 </App>
-            </Router>
+            </BrowserRouter>
         )
     }
 }
