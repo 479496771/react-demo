@@ -126,11 +126,12 @@ module.exports = function (webpackEnv) {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
-    devtool: isEnvProduction ?
-      shouldUseSourceMap ?
-      'source-map' :
-      false :
-      isEnvDevelopment && 'cheap-module-source-map',
+    devtool: false,
+    //  devtool: isEnvProduction ?
+    //    shouldUseSourceMap ?
+    //    'source-map' :
+    //    false :
+    //    isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
@@ -160,14 +161,12 @@ module.exports = function (webpackEnv) {
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: isEnvProduction ?
-        'static/js/[name].[contenthash:8].js' :
-        isEnvDevelopment && 'static/js/bundle.js',
+        'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/bundle.js',
       // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction ?
-        'static/js/[name].[contenthash:8].chunk.js' :
-        isEnvDevelopment && 'static/js/[name].chunk.js',
+        'static/js/[name].[contenthash:8].chunk.js' : isEnvDevelopment && 'static/js/[name].chunk.js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
@@ -176,8 +175,7 @@ module.exports = function (webpackEnv) {
         info =>
         path
         .relative(paths.appSrc, info.absoluteResourcePath)
-        .replace(/\\/g, '/') :
-        isEnvDevelopment &&
+        .replace(/\\/g, '/') : isEnvDevelopment &&
         (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
     optimization: {
@@ -232,16 +230,14 @@ module.exports = function (webpackEnv) {
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
             parser: safePostCssParser,
-            map: shouldUseSourceMap ?
-              {
-                // `inline: false` forces the sourcemap to be output into a
-                // separate file
-                inline: false,
-                // `annotation: true` appends the sourceMappingURL to the end of
-                // the css file, helping the browser find the sourcemap
-                annotation: true,
-              } :
-              false,
+            map: shouldUseSourceMap ? {
+              // `inline: false` forces the sourcemap to be output into a
+              // separate file
+              inline: false,
+              // `annotation: true` appends the sourceMappingURL to the end of
+              // the css file, helping the browser find the sourcemap
+              annotation: true,
+            } : false,
           },
         }),
       ],
@@ -486,8 +482,7 @@ module.exports = function (webpackEnv) {
             inject: true,
             template: paths.appHtml,
           },
-          isEnvProduction ?
-          {
+          isEnvProduction ? {
             minify: {
               removeComments: true,
               collapseWhitespace: true,
