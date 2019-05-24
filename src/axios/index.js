@@ -6,8 +6,8 @@ const axiosConfig = {};
 
 // axios 配置
 axiosConfig.axios = axios.create({
-    baseURL: 'http://192.168.35.246:9527',
-    // baseURL: 'http://loaclhost:9527',
+    // baseURL: 'http://192.168.35.246:9527',
+    baseURL: 'http://172.17.181.58:9527/react',
     timeout: 10000,
 });
 
