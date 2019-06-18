@@ -2,10 +2,15 @@ import React from 'react'
 import { Upload, Icon, Modal } from 'antd';
 import { connect } from 'react-redux'
 import { createAction } from './store'
+import $axios from '../../axios/index'
 
 class PicturesWall extends React.Component {
     render() {
         const { previewVisible, previewImage, fileList, handleChange, handlePreview, handleCancel, count, name = '添加图片' } = this.props;
+        const header = {
+            'Accept': "application/json, text/plain, */*",
+            'Content-Type': "application/json;charset=utf-8",
+        }
         const uploadButton = (
             <div>
                 <Icon type="plus" />
@@ -15,11 +20,13 @@ class PicturesWall extends React.Component {
         return (
             <div className="clearfix">
                 <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    action="http://localhost:9527/reactApi/api/uploadImg"
                     listType="picture-card"
                     fileList={fileList}
                     onPreview={handlePreview}
                     onChange={handleChange}
+                    name='file'
+                    accept='image/*'
                 >
                     {fileList.length >= count ? null : uploadButton}
                 </Upload>
@@ -44,6 +51,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleChange({ fileList }) {
             console.log(fileList)
+            // $axios.post('/api/uploadImg', fileList[0]).then(res => {
+            //     console.log(res)
+            // })
+            console.log(this)
             const action = createAction.addIndexImgAction(fileList)
             dispatch(action)
         },

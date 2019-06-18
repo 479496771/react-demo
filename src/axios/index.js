@@ -6,8 +6,8 @@ const axiosConfig = {};
 
 // axios 配置
 axiosConfig.axios = axios.create({
-    // baseURL: 'http://192.168.35.246:9527',
-    baseURL: 'http://172.17.181.58:9527/reactApi',
+    baseURL: 'http://192.168.35.246:9527/reactApi',
+    // baseURL: 'http://39.105.4.105/reactApi',
     timeout: 10000,
 });
 
@@ -24,10 +24,11 @@ axiosConfig.axios.interceptors.request.use(
         if (token) {
             config.headers['X-Access-Token'] = token;
         }
-        // if (config.method === 'post') {
-        //     config.data = JSON.stringify(config.data);
-        // }
-        console.log(config.data)
+        if (config.url === '/api/uploadImg') {
+            config.headers['Content-Type'] = 'multipart/form-data'
+        }
+        console.log(config)
+
         return config;
     },
     err => {

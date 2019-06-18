@@ -6,7 +6,7 @@ const stateDafault = fromJS({
     token: tokenInfo ? tokenInfo : "",
     login: tokenInfo ? true : false,
     addWindow: false,
-    loginWindow: true,
+    loginWindow: tokenInfo ? false : true,
     confirmLoading: false,
     alertMessage: ''
 })
