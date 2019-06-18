@@ -6,8 +6,8 @@ const axiosConfig = {};
 
 // axios 配置
 axiosConfig.axios = axios.create({
-    baseURL: 'http://192.168.35.246:9527/reactApi',
-    // baseURL: 'http://39.105.4.105/reactApi',
+    // baseURL: 'http://192.168.35.246:9527',
+    baseURL: 'http://39.105.4.105/reactApi',
     timeout: 10000,
 });
 
